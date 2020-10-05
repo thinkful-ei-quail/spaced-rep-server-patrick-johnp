@@ -28,6 +28,25 @@ const LanguageService = {
       )
       .where({ language_id })
   },
+
+  getHeadWord(db, language_id) {
+    return db
+    .from('language')
+    .select('head', 'total_score')
+    .where({id: language_id})
+    .first()
+    .then((res) => {
+      return db
+      .from('word')
+      .select('original', 'correct_count', 'incorrect_count')
+      .where({language_id, id: res.head})
+      .first()
+      .then(word => {
+        word.totalScore = res.total_score;
+        return word;
+      });
+    });
+  }
 }
 
 module.exports = LanguageService
