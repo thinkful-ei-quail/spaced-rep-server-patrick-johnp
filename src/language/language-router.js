@@ -1,26 +1,26 @@
-const express = require('express')
-const LanguageService = require('./language-service')
-const { requireAuth } = require('../middleware/jwt-auth')
+const express=require('express')
+const LanguageService=require('./language-service')
+const {requireAuth}=require('../middleware/jwt-auth')
 
-const languageRouter = express.Router()
+const languageRouter=express.Router()
 
 languageRouter
   .use(requireAuth)
   .use(async (req, res, next) => {
     try {
-      const language = await LanguageService.getUsersLanguage(
+      const language=await LanguageService.getUsersLanguage(
         req.app.get('db'),
         req.user.id,
       )
 
-      if (!language)
+      if(!language)
         return res.status(404).json({
           error: `You don't have any languages`,
         })
 
-      req.language = language
+      req.language=language
       next()
-    } catch (error) {
+    } catch(error) {
       next(error)
     }
   })
@@ -28,7 +28,7 @@ languageRouter
 languageRouter
   .get('/', async (req, res, next) => {
     try {
-      const words = await LanguageService.getLanguageWords(
+      const words=await LanguageService.getLanguageWords(
         req.app.get('db'),
         req.language.id,
       )
@@ -38,7 +38,7 @@ languageRouter
         words,
       })
       next()
-    } catch (error) {
+    } catch(error) {
       next(error)
     }
   })
@@ -55,4 +55,4 @@ languageRouter
     res.send('implement me!')
   })
 
-module.exports = languageRouter
+module.exports=languageRouter

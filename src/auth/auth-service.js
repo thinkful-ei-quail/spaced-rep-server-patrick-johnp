@@ -1,11 +1,11 @@
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const config = require('../config')
+const bcrypt=require('bcryptjs')
+const jwt=require('jsonwebtoken')
+const config=require('../config')
 
-const AuthService = {
+const AuthService={
   getUserWithUserName(db, username) {
     return db('user')
-      .where({ username })
+      .where({username})
       .first()
   },
   comparePasswords(password, hash) {
@@ -25,4 +25,4 @@ const AuthService = {
   },
 }
 
-module.exports = AuthService
+module.exports=AuthService
