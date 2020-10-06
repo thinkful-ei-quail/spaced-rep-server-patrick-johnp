@@ -4,6 +4,7 @@ const { requireAuth } = require('../middleware/jwt-auth');
 const jsonBodyParser = express.json();
 const LinkedList = require('../data_structures/linked-list');
 const { listen } = require('../app');
+const xss = require('xss');
 
 const languageRouter = express.Router();
 
@@ -63,10 +64,12 @@ languageRouter.get('/head', async (req, res, next) => {
 });
 
 languageRouter.post('/guess', jsonBodyParser, async (req, res, next) => {
-  const { guess } = req.body;
+  let { guess } = req.body;
   if (!guess) {
     return res.status(400).send({ error: `Missing 'guess' in request body` });
   }
+  guess = xss(guess);
+  guess = guess.toLowerCase();
   try {
     //Create linked list of words
     const words = await LanguageService.getWordsList(req.app.get('db'), req.language.id, new LinkedList());

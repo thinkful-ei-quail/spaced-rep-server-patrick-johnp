@@ -1,13 +1,14 @@
 const express = require('express')
 const path = require('path')
 const UserService = require('./user-service')
+const xss = require('xss');
 
 const userRouter = express.Router()
 const jsonBodyParser = express.json()
 
 userRouter
   .post('/', jsonBodyParser, async (req, res, next) => {
-    const { password, username, name } = req.body
+    let { password, username, name } = req.body
 
     for (const field of ['name', 'username', 'password'])
       if (!req.body[field])
@@ -15,6 +16,10 @@ userRouter
           error: `Missing '${field}' in request body`
         })
 
+    password = xss(password);
+    username = xss(username);
+    name = xss(name);
+    
     try {
       const passwordError = UserService.validatePassword(password)
 
