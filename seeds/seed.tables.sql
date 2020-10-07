@@ -27,12 +27,12 @@ VALUES
   (4, 1, 'forbróir', 'developer', 5),
   (5, 1, 'aistrigh', 'translate', 6),
   (6, 1, 'iontach', 'amazing', 7),
-  (7, 1, 'gaelige', 'Irish', 8)
+  (7, 1, 'gaelige', 'Irish', 8),
   (8, 1, 'ríomhaire', 'computer', 9),
   (9, 1, 'madra', 'dog', 10),
   (10, 1, 'clár', 'program', 11),
   (11, 1, 'cód', 'code', 12),
-  (12,1,'comhréir', "syntax",13),
+  (12, 1,'comhréir', 'syntax', 13),
   (13, 1, 'cat', 'cat', null);
 
 UPDATE "language" SET head = 1 WHERE id = 1;
