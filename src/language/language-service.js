@@ -65,10 +65,10 @@ const LanguageService = {
             if (startIndex < 0) {
               return list;
             }
-            let word = words[startIndex];
+            let word = words[startIndex % words.length];
             while (word) {
               list.insertLast(word);
-              word = words[word.next - 1];
+              word = words[(word.next - 1) % words.length];
             }
             return list;
           });

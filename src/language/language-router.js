@@ -86,7 +86,6 @@ languageRouter.post('/guess', jsonBodyParser, async (req, res, next) => {
       word.incorrect_count++;
     }
     //Shift
-    console.log(words.display());
     words.remove(word);
     let shiftedSpot = words.head;
     for(let i = 1; i < word.memory_value % words.length(); i++) {
@@ -100,14 +99,12 @@ languageRouter.post('/guess', jsonBodyParser, async (req, res, next) => {
       word.next = shiftedSpot.next.value.id;
     }
     //Persist updated data
-    console.log('5')
     const otherWord = shiftedSpot.value;
     const nextWord = words.head.value;
     req.language.head = nextWord.id;
     await LanguageService.updateWord(req.app.get('db'), word.id, word);
     await LanguageService.updateWord(req.app.get('db'), otherWord.id, otherWord);
     await LanguageService.updateLanguage(req.app.get('db'), req.language.id, req.language);
-    console.log('6')
     res.status(200).json({
       nextWord: nextWord.original,
       wordCorrectCount: nextWord.correct_count,
