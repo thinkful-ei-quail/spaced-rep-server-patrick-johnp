@@ -65,18 +65,15 @@ languageRouter.get('/head', async (req, res, next) => {
 
 languageRouter.post('/guess', jsonBodyParser, async (req, res, next) => {
   let { guess } = req.body;
-  console.log('1')
   if (!guess) {
     return res.status(400).send({ error: `Missing 'guess' in request body` });
   }
-  console.log('2')
   guess = xss(guess);
   guess = guess.toLowerCase();
   try {
     //Create linked list of words
     const words = await LanguageService.getWordsList(req.app.get('db'), req.language.id, new LinkedList());
     const word = words.head.value;
-    console.log('3')
     //Determine right or wrong
     const isCorrect = word.translation === guess;
     if(isCorrect) {
@@ -89,7 +86,7 @@ languageRouter.post('/guess', jsonBodyParser, async (req, res, next) => {
       word.incorrect_count++;
     }
     //Shift
-    console.log('4')
+    console.log(words.display());
     words.remove(word);
     let shiftedSpot = words.head;
     for(let i = 1; i < word.memory_value % words.length(); i++) {
