@@ -79,12 +79,9 @@ class LinkedList {
   }
 
   display() {
-    // Start at the head
     let currNode = this.head;
     let result = '';
-    // console.log('currNode before: ', currNode.value);
     while (currNode !== null) {
-      // console.log('currNode in while: ', currNode.value);
       result +=
         currNode.next === null ? `${currNode.value.id}` : `${currNode.value.id} -> `;
       currNode = currNode.next;
