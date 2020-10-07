@@ -106,7 +106,6 @@ languageRouter.post('/guess', jsonBodyParser, async (req, res, next) => {
     await LanguageService.updateWord(req.app.get('db'), word.id, word);
     await LanguageService.updateWord(req.app.get('db'), otherWord.id, otherWord);
     await LanguageService.updateLanguage(req.app.get('db'), req.language.id, req.language);
-
     res.status(200).json({
       nextWord: nextWord.original,
       wordCorrectCount: nextWord.correct_count,
