@@ -65,6 +65,11 @@ const UserService={
         ['aistrigh', 'translate', 6],
         ['iontach', 'amazing', 7],
         ['madra', 'dog', 8],
+        ['gaelige', 'Irish', 9],
+        ['ríomhaire', 'computer', 10],
+        ['clár', 'program', 11],
+        ['cód', 'code', 12],
+        ['comhréir', "syntax", 13],
         ['cat', 'cat', null],
       ]
 

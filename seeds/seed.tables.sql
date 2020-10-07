@@ -32,7 +32,7 @@ VALUES
   (9, 1, 'madra', 'dog', 10),
   (10, 1, 'clár', 'program', 11),
   (11, 1, 'cód', 'code', 12),
-  (12,1,"comhréir", "syntax",13),
+  (12,1,'comhréir', "syntax",13),
   (13, 1, 'cat', 'cat', null);
 
 UPDATE "language" SET head = 1 WHERE id = 1;
